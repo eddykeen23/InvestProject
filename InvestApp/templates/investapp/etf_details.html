@@ -1,0 +1,17 @@
+{% extends "investapp/base.html" %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url 'investapp:edit_etf' etf.id %}">Edit</a>
+    <a href="{% url 'investapp:delete_etf' etf.id %}">Delete</a>
+    <a href="{% url 'investapp:update_etf_price' etf.id %}">Update Price</a>
+  </p>
+
+  <ul>
+    <li>Symbol: {{ symbol }}</li>
+    <li>Name: {{ name }}</li>
+    <li>Current Price: ${{ currentPrice }}</li>
+  </ul>
+
+{% endblock content %}

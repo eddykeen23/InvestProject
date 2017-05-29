@@ -1,0 +1,28 @@
+{% extends "investapp/base.html" %}
+
+{% block content %}
+
+  <p>List of ETFs</p>
+
+  <table>
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>Current Price</th>
+    </tr>
+    {% for etf in etf_list %}
+    <tr>
+      <td><a href="{% url 'investapp:etf_details' etf.id %}">{{ etf.symbol }}</a></td>
+      <td>{{ etf.name }}</td>
+      <td>{{ etf.currentPrice }}</td>
+    {% empty %}
+      <li>No ETFs have been added yet.</li>
+    {% endfor %}
+    </tr>
+  </table>
+<br>
+  <a href="{% url 'investapp:refresh_etf_prices' %}">Refresh ETF Prices</a>
+<br>
+  <a href="{% url 'investapp:new_etf' %}">Add a new ETF:</a>
+
+{% endblock content %}
