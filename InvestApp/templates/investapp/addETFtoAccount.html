@@ -2,7 +2,7 @@
 
 {% block content %}
   <p>Add ETF to an Account:</p>
-  <form action="{% url 'investapp:addETFtoAccount' %}" method='post'>
+  <form action="{% url 'investapp:addETFtoAccount' account.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
     <button name="submit">Add ETF</button>

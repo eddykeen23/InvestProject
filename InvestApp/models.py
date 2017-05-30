@@ -30,6 +30,7 @@ class accountBreakdown(models.Model):
     accountID = models.ForeignKey(account)
     etfID = models.ForeignKey(etf)
     quantity = models.IntegerField()
+    owner = models.ForeignKey(User)
 
     def __str__(self):
         """Return a string representation of the model."""

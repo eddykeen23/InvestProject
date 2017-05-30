@@ -31,7 +31,7 @@ urlpatterns = [
     # List of all Accounts.
     url(r'^accounts_list/$', views.accounts_list, name='accounts_list'),
 
-    # Pager for single Account details
+    # Pager for Account Details
     url(r'^accounts_list/(?P<account_id>\d+)/$', views.account_details, name='account_details'),
 
     # Page for adding a new Account
@@ -44,6 +44,6 @@ urlpatterns = [
     url(r'^edit_account/(?P<account_id>\d+)/$', views.edit_account, name='edit_account'),
 
     # Page for adding an ETF to an Account
-    url(r'^accounts_list/(?P<account_id>\d+)/$', views.addETFtoAccount, name='addETFtoAccount'),
+    url(r'^addETFtoAccount/(?P<account_id>\d+)/$', views.addETFtoAccount, name='addETFtoAccount'),
 
 ]

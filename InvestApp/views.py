@@ -149,9 +149,11 @@ def new_account(request):
 def account_details(request, account_id):
     """Show a single Account and its attributes"""
     acc = get_object_or_404(account, id=account_id)
+    stock_list = accountBreakdown.objects.filter(owner=request.user, accountID=account_id).order_by('id')
+    #stock_list = get_object_or_404(accountBreakdown, accountID=account_id)
     if acc.owner != request.user:
         raise Http404
-    context = {'acc': acc}
+    context = {'acc': acc, 'stock_list': stock_list}
     return render(request, 'investapp/account_details.html', context)
 
 
@@ -186,6 +188,9 @@ def edit_account(request, account_id):
 @login_required
 def addETFtoAccount(request, account_id):
     """ Add an ETF to Account"""
+    account_to_edit = get_object_or_404(account, id=account_id)
+    if account_to_edit.owner != request.user:
+        raise Http404
     if request.method != 'POST':
         # No data submitted; create a blank form
         form = addETFtoAccount_form()
@@ -196,7 +201,6 @@ def addETFtoAccount(request, account_id):
             addedETF = form.save(commit=False)
             addedETF.owner = request.user
             addedETF.save()
-            return HttpResponseRedirect(reverse('investapp:account_details',
-                                                args=[account_id]))
-    context = {'form': form}
+            return HttpResponseRedirect(reverse('investapp:account_details', args=[account_id]))
+    context = {'account': account_to_edit, 'form': form}
     return render(request, 'investapp/addETFtoAccount.html', context)
