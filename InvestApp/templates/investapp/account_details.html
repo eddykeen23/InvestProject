@@ -1,0 +1,18 @@
+{% extends "investapp/base.html" %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url 'investapp:edit_account' acc.id %}">Edit</a>
+    <a href="{% url 'investapp:delete_account' acc.id %}">Delete</a>
+  </p>
+
+  <p><b>Account Details</b></p>
+
+  <ul>
+    <li>ID: {{ acc.id }}</li>
+    <li>Account Name: {{ acc.name }}</li>
+    <li>Account: {{ acc.type }}</li>
+  </ul>
+
+{% endblock content %}

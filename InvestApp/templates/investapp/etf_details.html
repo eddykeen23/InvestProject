@@ -8,10 +8,12 @@
     <a href="{% url 'investapp:update_etf_price' etf.id %}">Update Price</a>
   </p>
 
+  <p><b>ETF Details</b></p>
+
   <ul>
-    <li>Symbol: {{ symbol }}</li>
-    <li>Name: {{ name }}</li>
-    <li>Current Price: ${{ currentPrice }}</li>
+    <li>Symbol: {{ etf.symbol }}</li>
+    <li>Name: {{ etf.name }}</li>
+    <li>Current Price: ${{ etf.currentPrice }}</li>
   </ul>
 
 {% endblock content %}

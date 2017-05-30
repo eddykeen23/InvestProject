@@ -10,7 +10,7 @@ urlpatterns = [
     # List of all ETFs.
     url(r'^etf_list/$', views.etf_list, name='etf_list'),
 
-    # Pager for single ETF details
+    # Page for single ETF details
     url(r'^etf_list/(?P<etf_id>\d+)/$', views.etf_details, name='etf_details'),
 
     # Page for adding a new ETF
@@ -27,4 +27,20 @@ urlpatterns = [
 
     # Refresh All ETF Prices
     url(r'^refresh_etf_prices/$', views.refresh_etf_prices, name='refresh_etf_prices'),
+
+    # List of all Accounts.
+    url(r'^accounts_list/$', views.accounts_list, name='accounts_list'),
+
+    # Pager for single Account details
+    url(r'^accounts_list/(?P<account_id>\d+)/$', views.account_details, name='account_details'),
+
+    # Page for adding a new Account
+    url(r'^new_account/$', views.new_account, name='new_account'),
+
+    # Deleting Accounts
+    url(r'^delete_account/(?P<account_id>\d+)/$', views.delete_account, name='delete_account'),
+
+    # Page for editing an Account
+    url(r'^edit_account/(?P<account_id>\d+)/$', views.edit_account, name='edit_account'),
+
 ]

@@ -1,5 +1,6 @@
 <p>
   <a href="{% url 'investapp:index' %}">Home</a> -
+  <a href="{% url 'investapp:accounts_list' %}">Accounts List</a> -
   <a href="{% url 'investapp:etf_list' %}">ETF List</a> -
   {% if user.is_authenticated %}
     Hello, {{ user.username }}.

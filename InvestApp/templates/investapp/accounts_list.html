@@ -1,0 +1,26 @@
+{% extends "investapp/base.html" %}
+
+{% block content %}
+
+  <p>List of Accounts</p>
+
+  <table>
+    <tr>
+      <th>AccountID</th>
+      <th>Account Name</th>
+      <th>Account Type</th>
+    </tr>
+    {% for account in accounts_list %}
+    <tr>
+      <td><a href="{% url 'investapp:account_details' account.id %}">{{ account.id }}</a></td>
+      <td>{{ account.name }}</td>
+      <td>{{ account.type }}</td>
+    {% empty %}
+      <li>No Accounts have been added yet.</li>
+    {% endfor %}
+    </tr>
+  </table>
+  <br>
+    <a href="{% url 'investapp:new_account' %}">Add a new Account:</a>
+
+{% endblock content %}

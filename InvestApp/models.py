@@ -13,21 +13,21 @@ class etf(models.Model):
         return '%s %s $%s'%(self.symbol, self.name, self.currentPrice)
 
 
-class Account(models.Model):
+class account(models.Model):
     owner = models.ForeignKey(User)
-    accountName = models.CharField(max_length=200)
-    accountType = models.CharField(max_length=200)
-    totalCashValue = models.DecimalField(max_digits=6, decimal_places=2)
-    totalStockValue = DecimalField(max_digits=6, decimal_places=2)
-    totalAccountValue = DecimalField(max_digits=6, decimal_places=2)
+    name = models.CharField(max_length=200)
+    type = models.CharField(max_length=200)
+    totalCashValue = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    totalStockValue = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    totalAccountValue = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def __str__(self):
         """Return a string representation of the model."""
-        return self.accountName
+        return '%s %s'%(self.name, self.type)
 
 
-class AccountBreakdown(models.Model):
-    accountID = models.ForeignKey(Account)
+class accountBreakdown(models.Model):
+    accountID = models.ForeignKey(account)
     etfID = models.ForeignKey(etf)
     quantity = models.IntegerField()
 
