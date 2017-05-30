@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 from .models import etf, account, accountBreakdown
-from .forms import etf_form, account_form
+from .forms import etf_form, account_form, addETFtoAccount_form
 
 # Import for Google Finance API Query
 import requests, urllib, json
@@ -181,3 +181,22 @@ def edit_account(request, account_id):
                                                 args=[account_id]))
     context = {'account': account_to_edit, 'form': form}
     return render(request, 'investapp/edit_account.html', context)
+
+
+@login_required
+def addETFtoAccount(request, account_id):
+    """ Add an ETF to Account"""
+    if request.method != 'POST':
+        # No data submitted; create a blank form
+        form = addETFtoAccount_form()
+    else:
+        # POST data submitted; process data
+        form = addETFtoAccount_form(request.POST)
+        if form.is_valid():
+            addedETF = form.save(commit=False)
+            addedETF.owner = request.user
+            addedETF.save()
+            return HttpResponseRedirect(reverse('investapp:account_details',
+                                                args=[account_id]))
+    context = {'form': form}
+    return render(request, 'investapp/addETFtoAccount.html', context)

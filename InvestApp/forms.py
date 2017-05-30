@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import etf, account
+from .models import etf, account, accountBreakdown
 
 class etf_form(forms.ModelForm):
     class Meta:
@@ -13,3 +13,9 @@ class account_form(forms.ModelForm):
         model = account
         fields = ['name', 'type']
         labels = {'name': 'Account Name: ', 'type': 'Account Type'}
+
+class addETFtoAccount_form(forms.ModelForm):
+    class Meta:
+        model = accountBreakdown
+        fields = ['accountID', 'etfID', 'quantity']
+        labels = {'accountID': 'Account ID: ', 'etfID': 'etfID', 'quantity': 'Quantity: '}

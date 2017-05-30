@@ -1,0 +1,11 @@
+{% extends "investapp/base.html" %}
+
+{% block content %}
+  <p>Add ETF to an Account:</p>
+  <form action="{% url 'investapp:addETFtoAccount' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add ETF</button>
+  </form>
+
+{% endblock content %}

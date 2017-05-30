@@ -15,4 +15,24 @@
     <li>Account: {{ acc.type }}</li>
   </ul>
 
+  <p><b>Account Breakdown</b></p>
+
+  <table>
+    <tr>
+      <th>ETF_ID</th>
+      <th>Quantity</th>
+    </tr>
+    {% for stock in stock_list %}
+    <tr>
+      <td>{{ stock.etfID }}</a></td>
+      <td>{{ stock.quantity }}</td>
+    {% empty %}
+      <li>No stocks have been added yet.</li>
+    {% endfor %}
+    </tr>
+  </table>
+
+  <br>
+    <a href="{% url 'investapp:addETFtoAccount' acc.id%}">Add an ETF to an Account:</a>
+
 {% endblock content %}
