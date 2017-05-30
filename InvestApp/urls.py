@@ -43,4 +43,7 @@ urlpatterns = [
     # Page for editing an Account
     url(r'^edit_account/(?P<account_id>\d+)/$', views.edit_account, name='edit_account'),
 
+    # Page for adding an ETF to an Account
+    url(r'^accounts_list/(?P<account_id>\d+)/$', views.addETFtoAccount, name='addETFtoAccount'),
+
 ]
