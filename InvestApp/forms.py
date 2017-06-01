@@ -17,5 +17,5 @@ class account_form(forms.ModelForm):
 class addETFtoAccount_form(forms.ModelForm):
     class Meta:
         model = accountBreakdown
-        fields = ['accountID', 'etfID', 'quantity']
-        labels = {'accountID': 'Account ID: ', 'etfID': 'etfID', 'quantity': 'Quantity: '}
+        fields = ['etfID', 'quantity']
+        labels = {'etfID': 'ETF', 'quantity': 'Quantity'}

@@ -10,7 +10,7 @@ class etf(models.Model):
     currentPrice = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     def __str__(self):
         """Return a string representation of the model."""
-        return '%s %s $%s'%(self.symbol, self.name, self.currentPrice)
+        return self.symbol
 
 
 class account(models.Model):
@@ -23,7 +23,7 @@ class account(models.Model):
 
     def __str__(self):
         """Return a string representation of the model."""
-        return '%s %s'%(self.name, self.type)
+        return self.name
 
 
 class accountBreakdown(models.Model):

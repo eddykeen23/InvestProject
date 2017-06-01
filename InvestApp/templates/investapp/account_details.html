@@ -10,7 +10,6 @@
   <p><b>Account Details</b></p>
 
   <ul>
-    <li>ID: {{ acc.id }}</li>
     <li>Account Name: {{ acc.name }}</li>
     <li>Account: {{ acc.type }}</li>
   </ul>
@@ -20,11 +19,13 @@
   <table>
     <tr>
       <th>ETF_ID</th>
+      <th>ETF Symbol</th>
       <th>Quantity</th>
     </tr>
     {% for stock in stock_list %}
     <tr>
-      <td>{{ stock.etfID }}</a></td>
+      <td>{{ stock.etfID.id }}</td>
+      <td>{{ stock.etfID.symbol }}</td>
       <td>{{ stock.quantity }}</td>
     {% empty %}
       <li>No stocks have been added yet.</li>

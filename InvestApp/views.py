@@ -150,7 +150,6 @@ def account_details(request, account_id):
     """Show a single Account and its attributes"""
     acc = get_object_or_404(account, id=account_id)
     stock_list = accountBreakdown.objects.filter(owner=request.user, accountID=account_id).order_by('id')
-    #stock_list = get_object_or_404(accountBreakdown, accountID=account_id)
     if acc.owner != request.user:
         raise Http404
     context = {'acc': acc, 'stock_list': stock_list}
@@ -200,6 +199,7 @@ def addETFtoAccount(request, account_id):
         if form.is_valid():
             addedETF = form.save(commit=False)
             addedETF.owner = request.user
+            addedETF.accountID = account_to_edit
             addedETF.save()
             return HttpResponseRedirect(reverse('investapp:account_details', args=[account_id]))
     context = {'account': account_to_edit, 'form': form}
