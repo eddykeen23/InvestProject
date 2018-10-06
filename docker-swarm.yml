@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    image: investproject_web
+    ports:
+      - "8000:8000"
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+        reservations:
+          cpus: '0.01'
+          memory: 200M
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
