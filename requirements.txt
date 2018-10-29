@@ -1,2 +1,5 @@
 Django==1.11
 pytz==2017.2
+gunicorn==19.9.0
+psycopg2==2.7.5
+requests[security] == 2.9.1

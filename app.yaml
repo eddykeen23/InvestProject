@@ -1,0 +1,11 @@
+# [START runtime]
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT InvestProject.wsgi
+
+beta_settings:
+    cloud_sql_instances: ek-appenflex-django-test:us-central1:invapp-sql
+
+runtime_config:
+  python_version: 3
+# [END runtime]
