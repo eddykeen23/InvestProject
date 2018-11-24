@@ -25,7 +25,7 @@ SECRET_KEY = 'u7ag9z1cs^n++hbk&gi1c!menrkahdnauqntil7p)j#ck-nag4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ek-appenflex-django-test.appspot.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,29 +76,45 @@ WSGI_APPLICATION = 'InvestProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# [START dbconfig for GKE]
 DATABASES = {
     'default': {
         # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
         # 'ENGINE': 'django.db.backends.mysql' instead of the following.
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'polls',
-        'USER': 'polls-users',
-        'PASSWORD': '973frustUm72RD%.leAd',
-        # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
-        # SQL Proxy instances running locally must also be set to tcp:3306.
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
+# [END dbconfig for GKE]
+
+# # [START dbconfig for AppEngine Flex]
+# DATABASES = {
+    # 'default': {
+        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'polls',
+        # 'USER': 'polls-users',
+        # 'PASSWORD': '973frustUm72RD%.leAd',
+        # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
+        # SQL Proxy instances running locally must also be set to tcp:3306.
+        # 'PORT': '5432',
+    # }
+# }
 
 # In the flexible environment, you connect to CloudSQL using a unix socket.
 # Locally, you can use the CloudSQL proxy to proxy a localhost connection
 # to the instance
-DATABASES['default']['HOST'] = '/cloudsql/ek-appenflex-django-test:us-central1:invapp-sql'
-if os.getenv('GAE_INSTANCE'):
-    pass
-else:
-    DATABASES['default']['HOST'] = '127.0.0.1'
-# [END dbconfig]
+# DATABASES['default']['HOST'] = '/cloudsql/ek-appenflex-django-test:us-central1:invapp-sql'
+# if os.getenv('GAE_INSTANCE'):
+#    pass
+# else:
+#    DATABASES['default']['HOST'] = '127.0.0.1'
+# [END dbconfig for AppEngine Flex]
 
 
 # Password validation
@@ -137,7 +153,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = 'https://storage.googleapis.com/ek-invapp-blob/static/'
+# Static content for AppEngine Flex
+# STATIC_URL = 'https://storage.googleapis.com/ek-invapp-blob/static/'
+
+# Static content for GKE
+STATIC_URL = 'https://storage.googleapis.com/invapp-bucket/static/'
 
 # My settings
 LOGIN_URL = '/users/login/'
